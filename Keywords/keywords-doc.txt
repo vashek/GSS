@@ -1,0 +1,79 @@
+""" Developed and tested using Python 3.8.2
+
+General description
+-------------------
+It is expected that the script is run on a computer with Python 3.8 or above.
+The script takes 3 arguments (input, format, output). The script can process
+a comma separated text files or binary files complying with the specification.
+The script resolves the list of unique words and stores them to an output file
+a word per line. See more detailed description on Parameters, Example, Files
+specification, Functions and Error codes below.
+
+
+Parameters
+----------
+input : a string
+    The file location of the text or binary file to be processed.
+format : a character
+    Accepts only B or T (default is T)
+output : a string
+    The file where output will be stored (default is output-%date-%time.txt)
+time : boolean
+    If
+
+
+Example
+-------
+Examples for launching the script from command line:
+    >python keywords.py input.txt T output.txt
+    >python keywords.py input B output.txt
+    >python keywords.py input.txt T output.txt -t
+
+
+Files specification
+-------------------
+Text file
+    UTF-8 encoding
+    Comma separated list of words
+Binary file
+    UTF-8 encoding
+    Word definition part must correctly announce:
+        the number of words (first 8 bytes)
+        count of letters for each word (4 bytes * number of words)
+        the length of letters must match the total count of letters
+    Example: 00 00 00 03 00 05 00 04 00 06 a p p l e p e a r o r a n g e
+        file starts with 00 00 00 03 means there are 3 words
+        followed by 00 05 means that first word has 5 characters
+        followed by 00 04 means that first word has 4 characters
+        followed by 00 06 means that first word has 6 characters
+        the letters then results into words (apple, pear, orange)
+
+
+Functions
+---------
+Text processing
+    The text is processed if some commas are found in the input file.
+    The text is split using commas into a list of words.
+Binary processing
+    Binary file is processed if the file complies with the specification.
+    The input data is processed into a list of words.
+Sorting
+    The list of words is taken and sorted according to an alphabet storing
+    only unique values.
+Output file
+    The unique list of words is taken and stored into the file defined as
+    output. If not specified otherwise the output is stored into the same
+    folder where the script is run. Specifying "-t" or "--time" parameter
+    will add a timestamp as a prefix to the output file.
+    ! If the same file is used for an output it will add new output to the
+    end of the file.
+
+Error codes
+-----------
+The program exits with one of the following exit codes:
+    0  if the script has successfully completed
+    1  if the provided input file was not found
+    2  if the provided file does not contain expected input data
+    3  if the provided output file is not possible to reach
+    4  if the count of words and letters part does not match the word
+       definition part counts or vice versa.
