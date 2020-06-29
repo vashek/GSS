@@ -1,6 +1,6 @@
 """ Python 3.8.2
 
-Written by Tomas Jelinek (tomas.jeilnek@ysoft.com).
+Written by Tomas Jelinek (tomas.jelinek@ysoft.com).
 
 (c) Copyright YSoft Corporation, a.s., All Rights Reserved.
 
